@@ -4,6 +4,7 @@ import { Product } from "../entities/product";
 import axios from "axios";
 
 const repository = AppDataSource.getMongoRepository(Product);
+const URL_SERVICE_MAIN_SERVICE = process.env.URL_MAIN_SERVICE;
 
 export const ProductService = {
   getAll: async () => {
@@ -67,7 +68,7 @@ export const ProductService = {
     // Notificar al microservicio admin sobre el like
     try {
       await axios.post(
-        `http://localhost:5173/api/products/${product.admin_id}/like`,
+        `${URL_SERVICE_MAIN_SERVICE}/${product.admin_id}/like`,
         {}
       );
     } catch (error) {

@@ -9,7 +9,6 @@ productRouter.get(
   "/",
   asyncHandler(async (_req: Request, res: Response) => {
     const products = await ProductController.getAll();
-
     res.json({ success: true, data: products });
   })
 );
@@ -19,7 +18,6 @@ productRouter.get(
   "/:id",
   asyncHandler(async (req: Request, res: Response) => {
     const product = await ProductController.getOne(req.params.id);
-
     res.json({ success: true, data: product });
   })
 );
