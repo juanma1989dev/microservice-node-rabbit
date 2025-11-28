@@ -9,6 +9,11 @@ import dotenv from "dotenv";
 
 const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];
 const PORT_APP = process.env.PORT_APP || 8001;
+const rabbitmqUri = process.env.RABBITMQ_URI;
+
+if (!rabbitmqUri) {
+  throw new Error("The enviroment varaible RABBITMQ_URI is not defined");
+}
 
 const app = express();
 app.use(express.json());
