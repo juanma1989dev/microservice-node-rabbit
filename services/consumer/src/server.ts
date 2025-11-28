@@ -7,12 +7,13 @@ import { RabbitMQService } from "./services/rabbitmq.service";
 import { initializeRabbitMQConsumers } from "./rabbitmq.consumers";
 import dotenv from "dotenv";
 
+const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];
+const PORT_APP = process.env.PORT_APP || 8001;
+
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:4200", "http://localhost:5174"] }));
+app.use(cors({ origin: allowedOrigins }));
 dotenv.config();
-
-const PORT_APP = process.env.PORT_APP || 8001;
 
 AppDataSource.initialize()
   .then(async () => {
