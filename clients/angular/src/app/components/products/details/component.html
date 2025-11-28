@@ -1,0 +1,39 @@
+<div class="bg-white p-5 rounded-xl shadow-md flex flex-col relative">
+  <!-- Likes -->
+  <span class="right-3 absolute top-3 flex justify-center items-center">
+    {{ product.likes }} Likes
+
+    <!-- Simulación del icono Heart -->
+    <svg
+      class="h-5 w-5 ml-3 cursor-pointer"
+      [ngClass]="product.likes > 0 ? 'text-red-500' : 'text-gray-400'"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      (click)="onLike()"
+    >
+      <path
+        d="M3.172 5.172a4.001 4.001 0 015.656 0L10 6.343l1.172-1.171a4.001 4.001 0 115.656 5.656L10 18l-6.828-6.828a4.001 4.001 0 010-5.656z"
+      />
+    </svg>
+  </span>
+
+  <!-- Título -->
+  <h3 class="text-xl font-semibold mb-3 mt-5">{{ product.title }}</h3>
+
+  <!-- Imagen del producto -->
+  <div class="w-full h-52 overflow-hidden rounded-lg mb-4 bg-gray-100">
+    <img
+      [src]="'/images/' + product.image + '.webp'"
+      [alt]="product.title"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <!-- Link a detalles -->
+  <a
+    class="mt-auto w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center"
+    [routerLink]="'/product/edit/' + product.id"
+  >
+    View Details
+  </a>
+</div>

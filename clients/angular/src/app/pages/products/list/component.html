@@ -1,0 +1,19 @@
+<h1 class="text-2xl font-bold mb-6 flex justify-between items-center text-gray-600">
+  Product List
+</h1>
+
+@if (products().isLoading) {
+<div class="text-center p-6 text-blue-500">Cargando productos...</div>
+} @if (products().isError) {
+<div class="text-center p-6 text-red-500">
+  Error al cargar los productos: {{ products().error | json }}
+</div>
+}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  @for (product of (products().data ?? []); track product.id) {
+  <products-details [product]="product" (like)="likeProduct($event)"></products-details>
+  } @empty {
+  <p class="col-span-full text-center text-gray-500">No hay productos disponibles.</p>
+  }
+</div>

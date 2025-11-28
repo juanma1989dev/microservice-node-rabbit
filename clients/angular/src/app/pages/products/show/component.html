@@ -1,0 +1,27 @@
+@if (product().isLoading) {
+<div class="text-center p-6 text-blue-500">Cargando detalle del producto...</div>
+} @if (product().isError) {
+<div class="text-center p-6 text-red-500">
+  Error al cargar el producto: {{ product().error | json }}
+</div>
+}
+
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+  @if (product().data) {
+  <h2 class="text-2xl font-bold mb-4 text-gray-700">
+    {{ product().data?.title }}
+
+    <a routerLink="/" class="text-base px-5 text-gray-500"> < Back home </a>
+  </h2>
+
+  <div class="flex flex-col items-center md:flex-row md:items-start gap-6 object-cover">
+    <img
+      src="{{ '/images/' + product().data?.image + '.webp' }}"
+      alt="{{ product().data?.title }}"
+      class="w-48 h-48 object-cover mb-4"
+    />
+  </div>
+  } @else {
+  <p class="text-center text-gray-500">Producto no encontrado.</p>
+  }
+</div>

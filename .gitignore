@@ -1,0 +1,66 @@
+# ------------------------------------------------------
+# Global ignores
+# ------------------------------------------------------
+node_modules/
+dist/
+build/
+.tmp/
+temp/
+.cache/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+*.local
+.env.*
+!.env.example
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# ------------------------------------------------------
+# Angular
+# ------------------------------------------------------
+clients/angular/node_modules/
+clients/angular/dist/
+clients/angular/.angular/
+clients/angular/.env
+
+# ------------------------------------------------------
+# React
+# ------------------------------------------------------
+clients/react/node_modules/
+clients/react/dist/
+clients/react/.tanstack/
+clients/react/.env
+
+# ------------------------------------------------------
+# Node services (producer & consumer)
+# ------------------------------------------------------
+services/consumer/node_modules/
+services/consumer/dist/
+services/consumer/.env
+
+services/producer/node_modules/
+services/producer/dist/
+services/producer/.env
+
+# ------------------------------------------------------
+# Docker
+# ------------------------------------------------------
+docker-data/
+*.pid
+
+# ------------------------------------------------------
+# pnpm
+# ------------------------------------------------------
+.pnpm-store/
