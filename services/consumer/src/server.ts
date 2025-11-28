@@ -5,10 +5,14 @@ import { errorHandler } from "./middlewares/error.middleware";
 import { productRouter } from "./routes/product.routes";
 import { RabbitMQService } from "./services/rabbitmq.service";
 import { initializeRabbitMQConsumers } from "./rabbitmq.consumers";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: ["http://localhost:4200", "http://localhost:5174"] }));
+dotenv.config();
+
+const PORT_APP = process.env.PORT_APP || 8001;
 
 AppDataSource.initialize()
   .then(async () => {
@@ -23,8 +27,10 @@ AppDataSource.initialize()
     // Middleware global de errores (al final)
     app.use(errorHandler);
 
-    app.listen(8001, () => {
-      console.log("Servidor corriendo en el puerto 8001");
+    app.listen(PORT_APP, () => {
+      console.log(
+        `Servidor corriendo en el puerto http://localhost:${PORT_APP}/`
+      );
     });
 
     // Manejo de cierre graceful
