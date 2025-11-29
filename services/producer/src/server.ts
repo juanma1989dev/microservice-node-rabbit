@@ -4,6 +4,8 @@ import { AppDataSource } from "./data-source";
 import { productRouter } from "./routes/product.routes";
 import { RabbitMQService } from "./services/rabbitmq.service";
 import { errorHandler } from "./middlewares/error.middleware";
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];

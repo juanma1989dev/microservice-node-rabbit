@@ -7,6 +7,8 @@ import { RabbitMQService } from "./services/rabbitmq.service";
 import { initializeRabbitMQConsumers } from "./rabbitmq.consumers";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];
 const PORT_APP = process.env.PORT_APP || 8001;
 const rabbitmqUri = process.env.RABBITMQ_URI;
@@ -18,13 +20,12 @@ if (!rabbitmqUri) {
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: allowedOrigins }));
-dotenv.config();
 
 AppDataSource.initialize()
   .then(async () => {
     console.log("Conexión a la DB exitosa");
 
-    await RabbitMQService.connect("amqp://admin:securepassword@rabbitmq:5672");
+    await RabbitMQService.connect(rabbitmqUri);
 
     await initializeRabbitMQConsumers();
 
