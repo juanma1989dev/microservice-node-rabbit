@@ -1,81 +1,89 @@
-# Microservice Node Rabbit
+# Microservices with Node.js, RabbitMQ, Angular & React
 
-Este proyecto es una implementación de una arquitectura de microservicios orientada a eventos, utilizando Node.js, RabbitMQ, PostgreSQL y MongoDB.
+Este proyecto es una implementación robusta de una arquitectura de microservicios utilizando el patrón Productor/Consumidor para el procesamiento asíncrono de tareas. Demuestra la integración de múltiples tecnologías modernas para construir un sistema escalable y desacoplado.
 
-## Estructura del Proyecto
+## 🚀 Arquitectura del Proyecto
 
-El proyecto está organizado como un monorepo (pnpm workspace) con la siguiente estructura:
+El sistema se compone de dos servicios principales y dos clientes frontend, comunicándose a través de RabbitMQ:
 
-- **services/**: Contiene los servicios backend.
-  - **producer**: Servicio encargado de recibir peticiones HTTP, persistir datos en PostgreSQL y enviar mensajes a RabbitMQ.
-  - **consumer**: Servicio encargado de consumir mensajes de RabbitMQ y persistir datos en MongoDB.
-- **clients/**: Contiene las aplicaciones frontend.
-  - **angular**: Cliente desarrollado en Angular.
-  - **react**: Cliente desarrollado en React.
+1.  **Producer Service (Node.js/Express/PostgreSQL):** Recibe solicitudes HTTP, persiste datos transaccionales en PostgreSQL y publica eventos en RabbitMQ.
+2.  **Consumer Service (Node.js/Express/MongoDB):** Escucha eventos de RabbitMQ, procesa la información y almacena los resultados desnormalizados en MongoDB para consultas rápidas.
+3.  **Clientes Frontend:**
+    -   **Angular 19:** Panel de administración robusto.
+    -   **React 19:** Interfaz de usuario ligera y rápida.
 
-## Tecnologías
+## 💡 Habilidades y Competencias Adquiridas
 
-- **Backend**: Node.js, Express, TypeORM.
-- **Mensajería**: RabbitMQ (amqplib).
-- **Base de Datos**: PostgreSQL (Producer), MongoDB (Consumer).
-- **Frontend**: Angular, React.
-- **Gestor de Paquetes**: pnpm.
+El desarrollo de este proyecto consolidó conocimientos clave en ingeniería de software moderna:
 
-## Requisitos Previos
+*   **Arquitectura de Microservicios:** Diseño e implementación de servicios independientes y desacoplados, mejorando la mantenibilidad y escalabilidad.
+*   **Comunicación Orientada a Eventos:** Implementación de patrones de mensajería asíncrona con **RabbitMQ** para garantizar la resiliencia y el desacoplamiento entre servicios.
+*   **Persistencia Políglota:** Gestión eficiente de datos utilizando lo mejor de ambos mundos: **PostgreSQL** (TypeORM) para integridad relacional y **MongoDB** (Mongoose) para flexibilidad y velocidad en lectura.
+*   **Desarrollo Frontend Moderno:** Dominio de los frameworks más demandados (**Angular 19** y **React 19**), implementando interfaces reactivas y optimizadas con **TailwindCSS**.
+*   **Type Safety Full-Stack:** Uso extensivo de **TypeScript** tanto en backend como en frontend para reducir errores en tiempo de ejecución y mejorar la experiencia de desarrollo.
+*   **Contenerización y Orquestación:** (Opcional: si usaste Docker) Configuración de entornos de desarrollo reproducibles.
 
-Asegúrate de tener instalado y en ejecución lo siguiente:
+## 🛠️ Tech Stack
 
-- [Node.js](https://nodejs.org/) (v22 recomendado)
-- [pnpm](https://pnpm.io/)
-- [RabbitMQ](https://www.rabbitmq.com/) (Puerto 5672)
-- [PostgreSQL](https://www.postgresql.org/)
-- [MongoDB](https://www.mongodb.com/)
+### Backend
+*   **Runtime:** Node.js
+*   **Framework:** Express.js
+*   **Lenguaje:** TypeScript
+*   **Bases de Datos:** PostgreSQL, MongoDB
+*   **Mensajería:** RabbitMQ (amqplib)
+*   **ORM/ODM:** TypeORM, Mongoose
 
-> **Nota**: Los servicios están configurados actualmente para conectar a `rabbitmq` como host (común en entornos Docker). Si ejecutas localmente, asegúrate de ajustar las cadenas de conexión en `src/server.ts` o configurar tu `/etc/hosts`.
+### Frontend
+*   **Frameworks:** Angular 19, React 19
+*   **Build Tool:** Vite
+*   **Estilos:** TailwindCSS
+*   **Lenguaje:** TypeScript
 
-## Instalación
+## 🏁 Comenzando
 
-Instala las dependencias desde la raíz del proyecto:
+Sigue estos pasos para ejecutar el proyecto en tu entorno local.
 
-```bash
-pnpm install
-```
+### Prerrequisitos
+*   Node.js (v22 o superior)
+*   pnpm
+*   Instancias de RabbitMQ, PostgreSQL y MongoDB corriendo (localmente o vía Docker).
 
-## Ejecución
+### Instalación y Ejecución
 
-### Servicios Backend
+#### 1. Servicios Backend
 
-Para iniciar los servicios en modo desarrollo:
-
-**Producer Service** (Puerto 5173):
+**Producer:**
 ```bash
 cd services/producer
-pnpm dev
+pnpm install
+# Configura tus variables de entorno en .env
+pnpm run dev
 ```
 
-**Consumer Service** (Puerto 8001):
+**Consumer:**
 ```bash
 cd services/consumer
-pnpm dev
+pnpm install
+# Configura tus variables de entorno en .env
+pnpm run dev
 ```
 
-### Clientes Frontend
+#### 2. Clientes Frontend
 
-**React Client**:
-```bash
-cd clients/react
-pnpm dev
-```
-
-**Angular Client**:
+**Angular Client:**
 ```bash
 cd clients/angular
+pnpm install
 pnpm start
 ```
 
-## Configuración
+**React Client:**
+```bash
+cd clients/react
+pnpm install
+pnpm run dev
+```
 
-Actualmente, las configuraciones de conexión (DB, RabbitMQ) se encuentran en los archivos `src/server.ts` de cada servicio. Se recomienda migrar estas configuraciones a variables de entorno (`.env`) para mayor seguridad y flexibilidad.
+## 🤝 Contribución
 
-- **RabbitMQ**: `amqp://admin:securepassword@rabbitmq:5672`
-- **CORS**: Configurado para aceptar peticiones desde `localhost:3000`, `localhost:5174`, `localhost:4200`.
+Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request para mejoras.
