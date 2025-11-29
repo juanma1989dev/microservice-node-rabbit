@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
+
 import { AppDataSource } from "./data-source";
 import { errorHandler } from "./middlewares/error.middleware";
 import { productRouter } from "./routes/product.routes";
 import { RabbitMQService } from "./services/rabbitmq.service";
 import { initializeRabbitMQConsumers } from "./rabbitmq.consumers";
-import dotenv from "dotenv";
 
+import dotenv from "dotenv";
 dotenv.config();
 
 const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];
